@@ -38,11 +38,11 @@ pub trait Packed {
 
 impl<T: Serialize + for<'de> Deserialize<'de>> Packed for T {
     fn pack(&self) -> Vec<u8> {
-        bincode::serialize(&self).expect("can't serialize an agent message")
+        serde_json::to_vec(&self).expect("can't serialize an agent message")
     }
 
     fn unpack(data: &[u8]) -> Self {
-        bincode::deserialize(&data).expect("can't deserialize an agent message")
+        serde_json::from_slice(&data).expect("can't deserialize an agent message")
     }
 }
 
