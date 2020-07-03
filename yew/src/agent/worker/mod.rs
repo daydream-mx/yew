@@ -42,7 +42,7 @@ impl<T: Serialize + for<'de> Deserialize<'de>> Packed for T {
     }
 
     fn unpack(data: &[u8]) -> Self {
-        bincode::deserialize(&data).expect("can't deserialize an agent message")
+        bincode::deserialize(&data).unwrap()
     }
 }
 
