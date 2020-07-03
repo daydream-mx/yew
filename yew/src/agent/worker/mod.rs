@@ -92,6 +92,11 @@ fn send_to_remote<AGN>(
 fn worker_new(name_of_resource: &str, is_module: bool) -> Worker {
     let origin = utils::origin().unwrap();
     let script_url = format!("{}/{}", origin, name_of_resource);
+    cfg_if! {
+        if #[cfg(feature = "webpack")] {
+            return Worker::new(&script_url).expect("failed to spawn worker");
+        }
+    }
     let wasm_url = format!("{}/{}", origin, name_of_resource.replace(".js", "_bg.wasm"));
     let array = Array::new();
     array.push(
