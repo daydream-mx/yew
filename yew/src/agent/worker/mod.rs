@@ -95,6 +95,15 @@ fn worker_new(name_of_resource: &str, is_module: bool) -> Worker {
     cfg_if! {
         if #[cfg(feature = "webpack")] {
             return Worker::new(&script_url).expect("failed to spawn worker");
+        } else if #[cfg(feature = "webpack-modules")] {
+            let options = WorkerOptions::new();
+            Reflect::set(
+                options.as_ref(),
+                &JsValue::from_str("type"),
+                &JsValue::from_str("module"),
+            )
+            .unwrap();
+            return Worker::new_with_options(&script_url, &options).expect("failed to spawn worker");
         }
     }
     let wasm_url = format!("{}/{}", origin, name_of_resource.replace(".js", "_bg.wasm"));

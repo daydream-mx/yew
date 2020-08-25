@@ -5,11 +5,11 @@ mod local;
 mod pool;
 mod worker;
 
-pub use link::{AgentLink, Responder, AgentLifecycleEvent, AgentScope};
+pub use link::{AgentLifecycleEvent, AgentLink, AgentScope, Responder};
 pub use local::{Context, Job};
 pub(crate) use pool::*;
 pub use pool::{Dispatched, Dispatcher};
-pub use worker::{Private, Public, Threaded, FromWorker, ToWorker, Packed};
+pub use worker::{FromWorker, Packed, Private, Public, Threaded, ToWorker};
 
 use crate::callback::Callback;
 use serde::{Deserialize, Serialize};

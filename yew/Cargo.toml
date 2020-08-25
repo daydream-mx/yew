@@ -142,6 +142,7 @@ yaml = ["serde_yaml"]
 msgpack = ["rmp-serde"]
 cbor = ["serde_cbor"]
 webpack = []
+webpack-modules = []
 wasi-worker = []
 modules-worker = []
 
