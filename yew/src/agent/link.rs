@@ -19,7 +19,7 @@ pub struct AgentLink<AGN: Agent> {
 
 impl<AGN: Agent> AgentLink<AGN> {
     /// Create link for a scope.
-    pub(crate) fn connect<T>(scope: &AgentScope<AGN>, responder: T) -> Self
+    pub fn connect<T>(scope: &AgentScope<AGN>, responder: T) -> Self
     where
         T: Responder<AGN> + 'static,
     {
