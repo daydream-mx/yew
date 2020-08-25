@@ -113,7 +113,6 @@ fn worker_new(name_of_resource: &str, is_module: bool) -> Worker {
             array.push(
                 &format!(
                     r#""#,
-                    script_url,
                 )
                 .into(),
             );
