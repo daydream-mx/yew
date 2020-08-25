@@ -112,7 +112,7 @@ fn worker_new(name_of_resource: &str, is_module: bool) -> Worker {
         if #[cfg(feature = "wasi-worker")] {
             array.push(
                 &format!(
-                    r#"importScripts("{}");"#,
+                    r#""#,
                     script_url,
                 )
                 .into(),
