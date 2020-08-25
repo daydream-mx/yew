@@ -99,13 +99,26 @@ fn worker_new(name_of_resource: &str, is_module: bool) -> Worker {
     }
     let wasm_url = format!("{}/{}", origin, name_of_resource.replace(".js", "_bg.wasm"));
     let array = Array::new();
-    array.push(
-        &format!(
-            r#"importScripts("{}");wasm_bindgen("{}");"#,
-            script_url, wasm_url
-        )
-        .into(),
-    );
+    cfg_if! {
+        if #[cfg(feature = "wasi-worker")] {
+            array.push(
+                &format!(
+                    r#"importScripts("{}");"#,
+                    script_url,
+                )
+                .into(),
+            );
+        } else {
+            array.push(
+                &format!(
+                    r#"importScripts("{}");wasm_bindgen("{}");"#,
+                    script_url, wasm_url
+                )
+                .into(),
+            );
+        }
+    }
+
     let blob = Blob::new_with_str_sequence_and_options(
         &array,
         BlobPropertyBag::new().type_("application/javascript"),

@@ -142,6 +142,7 @@ yaml = ["serde_yaml"]
 msgpack = ["rmp-serde"]
 cbor = ["serde_cbor"]
 webpack = []
+wasi-worker = []
 
 [package.metadata.docs.rs]
 features = ["yaml", "cbor", "toml", "msgpack", "doc_test"]
