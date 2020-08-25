@@ -108,6 +108,14 @@ fn worker_new(name_of_resource: &str, is_module: bool) -> Worker {
                 )
                 .into(),
             );
+        } else if #[cfg(feature = "modules-worker")] {
+            array.push(
+                &format!(
+                    r#"new Worker("{}", { type: "module" });wasm_bindgen("{}");"#,
+                    script_url, wasm_url
+                )
+                .into(),
+            );
         } else {
             array.push(
                 &format!(
