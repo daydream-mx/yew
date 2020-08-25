@@ -6,7 +6,7 @@ use std::fmt;
 use std::rc::Rc;
 
 /// Defines communication from Worker to Consumers
-pub(crate) trait Responder<AGN: Agent> {
+pub trait Responder<AGN: Agent> {
     /// Implementation for communication channel from Worker to Consumers
     fn respond(&self, id: HandlerId, output: AGN::Output);
 }
@@ -82,7 +82,7 @@ impl<AGN: Agent> Clone for AgentLink<AGN> {
     }
 }
 /// This struct holds a reference to a component and to a global scheduler.
-pub(crate) struct AgentScope<AGN: Agent> {
+pub struct AgentScope<AGN: Agent> {
     shared_agent: Shared<AgentRunnable<AGN>>,
 }
 
@@ -141,7 +141,7 @@ impl<AGN> AgentRunnable<AGN> {
 
 /// Local Agent messages
 #[derive(Debug)]
-pub(crate) enum AgentLifecycleEvent<AGN: Agent> {
+pub enum AgentLifecycleEvent<AGN: Agent> {
     /// Request to create link
     Create(AgentLink<AGN>),
     /// Internal Agent message

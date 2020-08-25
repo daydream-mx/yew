@@ -48,7 +48,7 @@ impl<T: Serialize + for<'de> Deserialize<'de>> Packed for T {
 
 /// Serializable messages to worker
 #[derive(Serialize, Deserialize, Debug)]
-enum ToWorker<T> {
+pub enum ToWorker<T> {
     /// Client is connected
     Connected(HandlerId),
     /// Incoming message to Worker
@@ -61,7 +61,7 @@ enum ToWorker<T> {
 
 /// Serializable messages sent by worker to consumer
 #[derive(Serialize, Deserialize, Debug)]
-enum FromWorker<T> {
+pub enum FromWorker<T> {
     /// Worker sends this message when `wasm` bundle has loaded.
     WorkerLoaded,
     /// Outgoing message to consumer
